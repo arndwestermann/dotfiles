@@ -132,7 +132,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # Homebrew setup for Linux
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  fi
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
