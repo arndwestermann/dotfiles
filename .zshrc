@@ -159,3 +159,4 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export SSH_AUTH_SOCK="$SSH_AUTH_SOCK_FILE" 
 fi
 
+[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
