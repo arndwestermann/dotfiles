@@ -120,6 +120,14 @@ return {
 			-- }),
 			workspace_required = true,
 			single_file_support = false,
+			settings = {
+				diagnostics = {
+					-- ESLint (@typescript-eslint/no-unused-vars) already reports these and
+					-- respects our ^_ ignore pattern, so silence tsserver's duplicate hints.
+					--6133,
+					ignoredCodes = { 6192, 6196, 6198, 6199, 6205 },
+				},
+			},
 		})
 		vim.lsp.enable("ts_ls")
 
