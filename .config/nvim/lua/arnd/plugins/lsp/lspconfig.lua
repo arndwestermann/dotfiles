@@ -130,7 +130,7 @@ return {
 			-- 	root = { "angular.json", "nx.json" },
 			-- 	exclude = { "deno.json", "deno.jsonc" },
 			-- }),
-			filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
+			filetypes = { "typescript", "html", "htmlangular" },
 			root_markers = { "angular.json", "nx.json" },
 		})
 		vim.lsp.enable("angularls")
