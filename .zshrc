@@ -1,3 +1,7 @@
+# On macOS lazygit defaults to ~/Library/Application Support; this points it at
+# the stow-managed ~/.config. Matches the XDG default, so it's a no-op on Linux.
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.

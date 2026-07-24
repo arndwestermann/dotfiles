@@ -1,0 +1,30 @@
+os:
+  # Required: without it lazygit guesses the "nvim" preset from $EDITOR, which
+  # suspends lazygit before editing. It then never reads the quit we send, so
+  # the float stays open and the file opens inside it. This preset only
+  # suspends when not already inside nvim ($NVIM unset).
+  editPreset: "nvim-remote"
+  # Inside nvim, hand off to _G.lazygit_edit (defined in the lazygit.nvim spec).
+  # It quits lazygit and opens the file only after the float has closed, in the
+  # current window. Doing this in nvim rather than here is deliberate: lazygit
+  # runs these commands as children of its own pty, so anything chained after a
+  # quit gets killed before it runs.
+  edit: '[ -z "$NVIM" ] && (nvim -- {{filename}}) || nvim --server "$NVIM" --remote-expr "v:lua.lazygit_edit(''{{filename}}'')"'
+  editAtLine: '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || nvim --server "$NVIM" --remote-expr "v:lua.lazygit_edit(''{{filename}}'', ''{{line}}'')"'
+  openDirInEditor: '[ -z "$NVIM" ] && (nvim -- {{dir}}) || nvim --server "$NVIM" --remote-expr "v:lua.lazygit_edit(''{{dir}}'')"'
+  # Used when lazygit must block (e.g. interactive rebase), so it must not
+  # return until editing is done. A fresh nvim is correct here.
+  editAtLineAndWait: "nvim +{{line}} -- {{filename}}"
+gui:
+  useHunkModeInStagingView: false
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
+customCommands:
+  # <ctrl+v> on a file -> hand it to diffview.nvim for the big side-by-side
+  - key: "<c-v>"
+    context: "files"
+    description: "Review in diffview.nvim"
+    command: '[ -n "$NVIM" ] && nvim --server "$NVIM" --remote-expr "v:lua.lazygit_diffview(''{{.SelectedFile.Name}}'')" || true'
+    output: none
