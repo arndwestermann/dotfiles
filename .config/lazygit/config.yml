@@ -21,6 +21,8 @@ git:
   pagers:
     - colorArg: always
       pager: delta --dark --paging=never
+  services:
+    "gitlab.precess.de": "gitlab:gitlab.precess.de"
 customCommands:
   # <ctrl+v> on a file -> hand it to diffview.nvim for the big side-by-side
   - key: "<c-v>"
