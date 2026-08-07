@@ -32,6 +32,16 @@ return {
           colors.fg_gutter = fg_gutter
           colors.fg_sidebar = fg_dark
         end,
+        on_highlights = function(hl, _)
+          -- tokyonight blends these for its own bg; re-tint them for the deep blue above
+          hl.DiffAdd = { bg = "#14462f" } -- added line
+          hl.DiffDelete = { bg = "#4d1f2a" } -- removed line
+          hl.DiffChange = { bg = "#0d2f4d" } -- line containing a change
+          hl.DiffText = { bg = "#2f6098" } -- the changed part within that line
+          -- diffview: removed lines in the left pane, and its filler lines
+          hl.DiffviewDiffAddAsDelete = { bg = "#4d1f2a" }
+          hl.DiffviewDiffDelete = { fg = "#2b4056" }
+        end,
       })
       -- load the colorscheme here
       vim.cmd([[colorscheme tokyonight]])

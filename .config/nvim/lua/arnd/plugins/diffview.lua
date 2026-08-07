@@ -17,5 +17,11 @@ return {
 	},
 	opts = {
 		enhanced_diff_hl = true,
+		hooks = {
+			-- show the whole file instead of folding away unchanged hunks
+			diff_buf_win_enter = function(_, winid, _)
+				vim.wo[winid].foldenable = false
+			end,
+		},
 	},
 }
