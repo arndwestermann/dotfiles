@@ -15,6 +15,17 @@ fi
 # Linux
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+# PATH must be complete before anything below probes for binaries (e.g. the
+# `command -v nvim` check that picks $EDITOR), otherwise a fresh shell that
+# didn't inherit these dirs silently takes the fallback branch.
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  fi
+fi
+
+export PATH="$HOME/.local/bin:$PATH"
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -134,13 +145,6 @@ export NVM_DIR="$HOME/.nvm"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Homebrew setup for Linux
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  fi
-fi
-
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # SSH Agent with fixed socket path
   SSH_AUTH_SOCK_FILE="$HOME/.ssh/agent.sock"
@@ -164,4 +168,3 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 [ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
-export PATH="$HOME/.local/bin:$PATH"
