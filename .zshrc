@@ -118,6 +118,8 @@ if command -v nvim >/dev/null 2>&1; then
 else
   export EDITOR='vim'
 fi
+# sudoedit checks $VISUAL before $EDITOR, so set its own variable explicitly.
+export SUDO_EDITOR="$EDITOR"
 
 # Compilation flags
 # Mac:
